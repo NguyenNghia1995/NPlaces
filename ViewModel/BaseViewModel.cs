@@ -38,7 +38,7 @@ namespace NPlaces.ViewModel
         public async void GetNearPlaces(string type)
         {
             string locationStr = Common.Common.CurentLocation.lat.ToString() + "," + Common.Common.CurentLocation.lng.ToString();
-            String request = PlaceAPI.CreateNearBySearhRequest(locationStr, type, "15000");
+            String request = PlaceAPI.CreateNearBySearhRequest(locationStr, type);
 
             try
             {

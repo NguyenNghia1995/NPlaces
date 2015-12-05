@@ -11,7 +11,7 @@ namespace NPlaces.Model
         public  const String Atm = "atm";
         public  const String Bank = "bank";
         public  const String Cafe = "cafe";
-        public  const String Cinema = "cinema";
+        public const String Cinema = "movie_theater";
         public  const String Food = "food";
         public  const String Hospital = "hospital";
         public  const String Police = "police";
