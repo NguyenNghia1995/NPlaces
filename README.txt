@@ -44,7 +44,8 @@ I. Tổng quan về ứng dụng NPlaces
 
  2. Test
  - Sử dụng các khối try catch để bắt lỗi trong quá trình phát sinh, và Show log (Debug.Write) để hiện có thông tin về chi tiết lỗi, và fix lỗi.
- - Video demo test app: 
+ - Kiểm tra bộ nhớ mà ứng dụng đã sử dụng trong quá trình chạy bằng hàm CheckMemoryUse();
+ - Video demo test app: https://www.youtube.com/watch?v=cdcy1DnT4ws
 
 
 
