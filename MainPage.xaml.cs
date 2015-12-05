@@ -38,7 +38,7 @@ namespace NPlaces
     {
         private DispatcherTimer m_memoryTimer;
 
-        private void STDIO_memoryTimerInit()
+        private void CheckMemoryUse()
         {
             m_memoryTimer = new DispatcherTimer();
             m_memoryTimer.Interval = new TimeSpan(0, 0, 1);
@@ -64,9 +64,6 @@ namespace NPlaces
             this.NavigationCacheMode = NavigationCacheMode.Required;
             DrawerLayout.InitializeDrawerLayout();
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-           
-
-
         }
 
         
@@ -74,7 +71,14 @@ namespace NPlaces
         void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             if (DrawerLayout.IsDrawerOpen)
+            {
                 DrawerLayout.CloseDrawer();
+                e.Handled = true;
+            }
+            else
+            {
+                Application.Current.Exit();
+            }
         }
 
 
@@ -86,7 +90,7 @@ namespace NPlaces
         /// This parameter is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-         STDIO_memoryTimerInit();
+            CheckMemoryUse();
             if (NetworkInterface.GetIsNetworkAvailable())
             {
                 if (e.NavigationMode == NavigationMode.New)
@@ -110,12 +114,9 @@ namespace NPlaces
             }
             else
             {
-                MessageDialog dialog = new MessageDialog("please check your network, and try againt");
+                MessageDialog dialog = new MessageDialog("please check your network, and try again");
                 await dialog.ShowAsync();
             }
-
-
-
         }
 
 
