@@ -98,7 +98,8 @@ namespace NPlaces
         /// This parameter is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            CheckMemoryUse();
+            //Check Memory using while app lauching
+           // CheckMemoryUse();
             if (NetworkInterface.GetIsNetworkAvailable())
             {
                 if (e.NavigationMode == NavigationMode.New)
