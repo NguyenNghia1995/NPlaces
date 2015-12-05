@@ -1,0 +1,3 @@
+MainPackage=F:\App Windows Phone\Android App\NPlaces\bin\Debug\NPlaces_1.0.0.3_Bundle\NPlaces_1.0.0.3_AnyCPU_Debug.appx
+SymbolPackage=F:\App Windows Phone\Android App\NPlaces\AppPackages\NPlaces_1.0.0.3_Debug_Test\NPlaces_1.0.0.3_AnyCPU_Debug.appxsym
+ResourcePack=F:\App Windows Phone\Android App\NPlaces\bin\Debug\NPlaces_1.0.0.3_Bundle\NPlaces_1.0.0.3_scale-100.appx

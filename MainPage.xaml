@@ -1,0 +1,119 @@
+﻿<Page
+    x:Class="NPlaces.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NPlaces"
+    xmlns:drawerLayout="using:DrawerLayout"  
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+    <Grid x:Name="RootLayout">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- Title Bar -->
+        <Grid x:Name="TitleBar" Background="#009688" Grid.Row ="0" Height="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Margin="5"  x:Name="DrawerIcon"  Grid.Column="0" Source="/Assets/ic_drawer.png" HorizontalAlignment="Left" Tapped="DrawerIcon_Tapped" />
+            <TextBlock x:Name="txtTitle" Grid.Column="1" Text="NPlaces" Foreground="White" VerticalAlignment="Center" FontSize="32"/>
+        </Grid>
+        <!-- Drawer Layout -->
+        <drawerLayout:DrawerLayout Grid.Row="1"  x:Name="DrawerLayout">
+            <!--MainFragment-->
+            <Grid x:Name="MainFragment" Background="White">
+                <!--Loading Grid-->
+                <Grid x:Name="LoadingGrid">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Canvas Grid.Row="0" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Canvas.RenderTransform>
+                                <RotateTransform x:Name="SpinnerRotate" Angle="0" />
+                            </Canvas.RenderTransform>
+                            <Canvas.Triggers>
+                                <EventTrigger RoutedEvent="Canvas.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="SpinnerRotate"    
+                                            Storyboard.TargetProperty="(RotateTransform.Angle)"    
+                                            From="0" To="360" Duration="0:0:01"    
+                                            RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Canvas.Triggers>
+                            <Image  HorizontalAlignment="Center" Width="32" Height="32" VerticalAlignment="Center"  RenderTransformOrigin="0.5,0.5" Source="/Assets/Image/ic_loading.png">
+                                <Image.RenderTransform>
+                                    <CompositeTransform/>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Canvas>
+                    </Grid>
+                </Grid>
+                <!--ContentGrid-->
+                <Grid x:Name="ContentGrid">
+                    <ListView x:Name="lvContent" IsItemClickEnabled="True" ItemClick="lvContent_ItemClick">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Background="#ecf0f1" Margin="12,6,12,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Margin="6,0,0,0" Grid.Column="0" Source="{Binding IconPath}" VerticalAlignment="Center" Height="42" Width="42" />
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="{Binding Name}" Margin="6,3,6,3" Foreground="#2c3e50" FontSize="25" />
+                                        <TextBlock Text="{Binding Address}" Margin="6,0,6,3" TextWrapping="Wrap" Foreground="#95a5a6" FontSize="20" FontWeight="Thin" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                
+            </Grid>
+
+            <!--ListFragment-->
+            <Grid x:Name="ListFragment" Background="#ecf0f1">
+                <ListView x:Name="ListMenuItems" IsItemClickEnabled="True" ItemClick="ListMenuItems_ItemClick">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid Grid.Row="0" Margin="6,6,6,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Margin="12,0,0,0" Source="{Binding IconPath}" Height="36" Width="36" />
+                                    <TextBlock Grid.Column="2" Margin="12,0,0,0" VerticalAlignment="Center" Foreground="#34495e" Text="{Binding Title}" FontSize="24" />
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </drawerLayout:DrawerLayout>
+    </Grid>
+</Page>
