@@ -58,7 +58,7 @@ namespace NPlaces.ViewModel
             }
             catch (Exception ex)
             {
-                MessageDialog dialog = new MessageDialog("Co loi xay ra trong qua trinh download");
+                Debug.WriteLine(ex.Message);
             }
 
 

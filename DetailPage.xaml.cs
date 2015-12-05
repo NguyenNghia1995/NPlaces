@@ -22,6 +22,9 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.Phone.UI.Input;
+using System.Net.NetworkInformation;
+using Windows.UI.Popups;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -42,7 +45,11 @@ namespace NPlaces
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+
         }
+
+
 
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
@@ -75,27 +82,42 @@ namespace NPlaces
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
 
-
-            //Get _place data from MainPage
-            Place _place = e.NavigationParameter as Place;
-
-            //set TitleBar
-            txtTitle.Text = _place.Name;
-
-            //Init placeDetail
-            PlaceDetail placeDetail = new PlaceDetail();
-            try
+            if (NetworkInterface.GetIsNetworkAvailable())
             {
-                await placeDetail.GetDetailInfo(_place);
-                MainFragment.DataContext = placeDetail;
+                MainFragment.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                GridLoading.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+
+                //Get _place data from MainPage
+                Place _place = e.NavigationParameter as Place;
+
+                //set TitleBar
+                txtTitle.Text = _place.Name;
+
+                //Init placeDetail
+                PlaceDetail placeDetail = new PlaceDetail();
+                try
+                {
+                    await placeDetail.GetDetailInfo(_place);
+                    MainFragment.DataContext = placeDetail;
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+
                 MainFragment.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 GridLoading.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             }
-            catch (Exception ex)
+            else
             {
-                Debug.WriteLine(ex.Message);
+                MessageDialog dialog = new MessageDialog("please check your network, and try again");
+                await dialog.ShowAsync();
             }
         }
+
+
 
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the

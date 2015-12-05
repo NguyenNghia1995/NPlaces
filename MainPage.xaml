@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Image Margin="5"  x:Name="DrawerIcon"  Grid.Column="0" Source="/Assets/ic_drawer.png" HorizontalAlignment="Left" Tapped="DrawerIcon_Tapped" />
+            <Image Margin="5"  x:Name="DrawerIcon"  Grid.Column="0" Source="/Assets/Image/ic_drawer.png" HorizontalAlignment="Left" Tapped="DrawerIcon_Tapped" />
             <TextBlock x:Name="txtTitle" Grid.Column="1" Text="NPlaces" Foreground="White" VerticalAlignment="Center" FontSize="32"/>
         </Grid>
         <!-- Drawer Layout -->

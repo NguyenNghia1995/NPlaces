@@ -45,7 +45,7 @@ namespace NPlaces.ViewModel
             _menuData.Add(new Menu("Bar", "BAR", BasePath + "bar.png"));
             _menuData.Add(new Menu("Park", "PARK", BasePath + "park.png"));
             _menuData.Add(new Menu("Post Office", "POSTOFFICE", BasePath + "post_office.png"));
-            _menuData.Add(new Menu("All Place", "AllPLACE", BasePath + "allplace.png"));
+            _menuData.Add(new Menu("All Place", "ALLPLACE", BasePath + "allplace.png"));
             IsLoaded = true;
         }
     }

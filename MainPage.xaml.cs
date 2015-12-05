@@ -38,6 +38,15 @@ namespace NPlaces
     {
         private DispatcherTimer m_memoryTimer;
 
+        public MainPage()
+        {
+            this.InitializeComponent();
+
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            DrawerLayout.InitializeDrawerLayout();
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+        }
+
         private void CheckMemoryUse()
         {
             m_memoryTimer = new DispatcherTimer();
@@ -57,14 +66,7 @@ namespace NPlaces
                 Debug.WriteLine(ex.Message);
             }
         }
-        public MainPage()
-        {
-            this.InitializeComponent();
-
-            this.NavigationCacheMode = NavigationCacheMode.Required;
-            DrawerLayout.InitializeDrawerLayout();
-            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-        }
+       
 
         
 
@@ -72,12 +74,18 @@ namespace NPlaces
         {
             if (DrawerLayout.IsDrawerOpen)
             {
-                DrawerLayout.CloseDrawer();
+                DrawerLayout.CloseDrawer();//Close drawer on back press 
                 e.Handled = true;
             }
             else
             {
-                Application.Current.Exit();
+                Frame frame = Window.Current.Content as Frame;
+                if (frame == null) return;
+                if (frame.CanGoBack)
+                {
+                    frame.GoBack();
+                    e.Handled = true;
+                }
             }
         }
 
@@ -138,10 +146,9 @@ namespace NPlaces
         {
             Menu menu = e.ClickedItem as Menu;
             txtTitle.Text = menu.Title;
+            DrawerLayout.CloseDrawer();
 
-            LoadingGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            ContentGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-
+            lvContent.ItemsSource = null;
             switch (menu.TAG)
             {
                 case "ATM":
@@ -232,10 +239,6 @@ namespace NPlaces
                 default:
                     break;
             }
-            DrawerLayout.CloseDrawer();
-            LoadingGrid.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            ContentGrid.Visibility = Windows.UI.Xaml.Visibility.Visible;
-
         }
 
     }

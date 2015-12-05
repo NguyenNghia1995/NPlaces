@@ -11,10 +11,6 @@ namespace NPlaces.Helper
 {
     public class WebHelper
     {
-        public WebHelper()
-        {
-
-        }
         public static async Task<string> GetStringFromRequest(string url)
         {
             string result = string.Empty;
@@ -27,7 +23,6 @@ namespace NPlaces.Helper
                 }
                 catch(Exception ex)
                 {
-
                     Debug.WriteLine(ex.Message);
                 }
             }

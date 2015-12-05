@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -41,7 +42,15 @@ namespace NPlaces
 
         private async void OnResuming(object sender, object e)
         {
-            Common.Common.CurentLocation = await LocationHelper.GetCurrentLocation();
+            try
+            {
+                Common.Common.CurentLocation = await LocationHelper.GetCurrentLocation();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
         }
 
         /// <summary>

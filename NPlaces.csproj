@@ -124,9 +124,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\ic_drawer.png" />
+    <Content Include="Assets\Image\ic_drawer.png" />
     <Content Include="Assets\Image\ic_loading_detail.png" />
     <Content Include="Assets\Image\ic_loaing_detail.png" />
+    <Content Include="Assets\Logo.png" />
     <Content Include="Assets\Menu\nav_allplace.png" />
     <Content Include="Assets\Image\ic_author.png" />
     <Content Include="Assets\Image\ic_distance.png" />
@@ -177,7 +178,10 @@
     </Content>
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\Square71x71Logo.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\WideLogo.scale-240.png" />
+    <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
